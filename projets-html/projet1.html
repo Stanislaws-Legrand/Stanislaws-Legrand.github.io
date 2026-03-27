@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projet Serre Connectée | Stanislas LEGRAND</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        /* Système de langue */
+        html[lang="fr"] .lang-en { display: none !important; }
+        html[lang="en"] .lang-fr { display: none !important; }
+        
+        .glass {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(229, 231, 235, 0.5);
+        }
+
+        .gradient-bg {
+            background: linear-gradient(135deg, #f8fafc 0%, #eff6ff 100%);
+        }
+
+        .tech-badge {
+            background: rgba(37, 99, 235, 0.1);
+            color: #2563eb;
+            border: 1px solid rgba(37, 99, 235, 0.2);
+        }
+
+        /* Effet de flou sur le contenu principal quand la modal est ouverte */
+        .blur-content {
+            filter: blur(8px);
+            transition: filter 0.3s ease;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body class="gradient-bg text-slate-900 overflow-x-hidden">
+
+    <!-- Modal pour l'image en plein écran (Dezoomed) -->
+    <div id="imageModal" class="fixed inset-0 z-[100] hidden flex items-center justify-center bg-black/70 backdrop-blur-md transition-opacity duration-300 opacity-0" onclick="closeModal()">
+        <button class="absolute top-6 right-6 text-white hover:text-blue-400 transition-colors z-[110]">
+            <i data-lucide="x" class="w-10 h-10"></i>
+        </button>
+        <div class="max-w-[82vw] max-h-[82vh] relative p-4 flex items-center justify-center" onclick="event.stopPropagation()">
+            <img id="modalImage" src="" alt="Zoom Diagramme" class="w-full h-full object-contain rounded-2xl shadow-2xl border border-white/10">
+        </div>
+    </div>
+
+    <!-- Wrapper pour le contenu floutable -->
+    <div id="pageContent" class="transition-all duration-300">
+        <!-- Navigation -->
+        <nav class="fixed w-full z-50 glass">
+            <div class="max-w-6xl mx-auto px-6">
+                <div class="flex justify-between h-20 items-center">
+                    <a href="../index.html" class="flex items-center gap-2 font-bold text-xl tracking-tight hover:opacity-80 transition-all">
+                        <i data-lucide="arrow-left" class="text-blue-600"></i>
+                        <span class="lang-fr">Retour</span><span class="lang-en">Back</span>
+                    </a>
+                    
+                    <div class="flex items-center space-x-4">
+                        <button onclick="toggleLanguage()" class="flex items-center gap-2 px-3 py-1.5 rounded-full border border-slate-300 hover:bg-slate-100 transition-all font-bold text-xs uppercase">
+                            <i data-lucide="languages" class="w-4 h-4 text-blue-600"></i>
+                            <span id="lang-btn-text">EN</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Project Hero -->
+        <section class="pt-32 pb-20 px-6">
+            <div class="max-w-4xl mx-auto">
+                <div class="inline-block px-4 py-1.5 mb-6 text-xs font-bold tracking-widest text-green-600 bg-green-50 rounded-full uppercase border border-green-100">
+                    <span class="lang-fr">Projet Académique — La Providence</span>
+                    <span class="lang-en">Academic Project — La Providence</span>
+                </div>
+                <h1 class="text-4xl md:text-6xl font-extrabold text-slate-900 mb-6 tracking-tight">
+                    <span class="lang-fr">Projet Serre Autonome & Connectée</span>
+                    <span class="lang-en">Autonomous & Connected Greenhouse Project</span>
+                </h1>
+                <p class="text-xl text-slate-600 leading-relaxed mb-8 text-justify">
+                    <span class="lang-fr">Conception et développement d'un système de gestion automatisé pour une serre pédagogique, intégrant la régulation hygrothermique et la gestion intelligente des ressources en eau.</span>
+                    <span class="lang-en">Design and development of an automated management system for a pedagogical greenhouse, integrating hygrothermal regulation and intelligent water resource management.</span>
+                </p>
+                
+                <div class="flex flex-wrap gap-3">
+                    <span class="tech-badge px-3 py-1 rounded-lg text-sm font-bold">HTML & CSS</span>
+                    <span class="tech-badge px-3 py-1 rounded-lg text-sm font-bold">Node.js</span>
+                    <span class="tech-badge px-3 py-1 rounded-lg text-sm font-bold">Modbus TCP</span>
+                    <span class="tech-badge px-3 py-1 rounded-lg text-sm font-bold">SQL</span>
+                    <span class="tech-badge px-3 py-1 rounded-lg text-sm font-bold">IOT</span>
+                    <span class="tech-badge px-3 py-1 rounded-lg text-sm font-bold"><span class="lang-fr">Gestion de Projet</span><span class="lang-en">Project Management</span></span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Main Content -->
+        <main class="max-w-6xl mx-auto px-6 pb-20 space-y-16">
+            
+            <!-- Key Metrics -->
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-white p-8 rounded-3xl shadow-sm border border-slate-100 text-center">
+                    <div class="w-12 h-12 bg-blue-100 text-blue-600 rounded-2xl flex items-center justify-center mb-4 mx-auto">
+                        <i data-lucide="thermometer"></i>
+                    </div>
+                    <h4 class="font-bold text-slate-900">Regulation</h4>
+                    <p class="text-sm text-slate-500 lang-fr">Automatisée (Hygrothermie)</p>
+                    <p class="text-sm text-slate-500 lang-en">Automated (Hygrothermal)</p>
+                </div>
+                <div class="bg-white p-8 rounded-3xl shadow-sm border border-slate-100 text-center">
+                    <div class="w-12 h-12 bg-green-100 text-green-600 rounded-2xl flex items-center justify-center mb-4 mx-auto">
+                        <i data-lucide="droplets"></i>
+                    </div>
+                    <h4 class="font-bold text-slate-900">Water Management</h4>
+                    <p class="text-sm text-slate-500 lang-fr">Pluie / Eau Courante</p>
+                    <p class="text-sm text-slate-500 lang-en">Rainwater / Tap Water</p>
+                </div>
+                <div class="bg-white p-8 rounded-3xl shadow-sm border border-slate-100 text-center">
+                    <div class="w-12 h-12 bg-purple-100 text-purple-600 rounded-2xl flex items-center justify-center mb-4 mx-auto">
+                        <i data-lucide="shield-check"></i>
+                    </div>
+                    <h4 class="font-bold text-slate-900">Access Control</h4>
+                    <p class="text-sm text-slate-500 lang-fr">Lecteur RFID & Arduino</p>
+                    <p class="text-sm text-slate-500 lang-en">RFID Reader & Arduino</p>
+                </div>
+            </div>
+
+            <!-- 1. Architecture Système -->
+            <section class="grid lg:grid-cols-5 gap-12 items-start bg-white p-8 md:p-12 rounded-3xl border border-slate-100 shadow-sm">
+                <div class="lg:col-span-3 space-y-8">
+                    <div>
+                        <h2 class="text-3xl font-bold mb-6 flex items-center gap-3">
+                            <i data-lucide="network" class="text-blue-600"></i>
+                            <span class="lang-fr">Architecture de la Serre Connectée</span>
+                            <span class="lang-en">Connected Greenhouse Architecture</span>
+                        </h2>
+                        <p class="text-slate-600 leading-relaxed text-justify mb-6">
+                            <span class="lang-fr">Le système est conçu autour d'une architecture réseau distribuée, où chaque sous-ensemble communique via un commutateur (switch) Ethernet central. L'intelligence du système est centralisée sur un serveur (Node.js) qui orchestre les échanges en utilisant principalement le protocole Modbus TCP.</span>
+                            <span class="lang-en">The system is designed around a distributed network architecture, where each sub-assembly communicates via a central Ethernet switch. System intelligence is centralized on a server (Node.js) that orchestrates exchanges using the Modbus TCP protocol.</span>
+                        </p>
+                    </div>
+
+                    <div class="grid md:grid-cols-1 gap-8">
+                        <div class="border-l-4 border-blue-500 pl-4 space-y-2">
+                            <h4 class="font-bold text-slate-900 uppercase text-sm tracking-wide">
+                                <span class="lang-fr">1. Gestion Environnementale (TCW241)</span>
+                                <span class="lang-en">1. Environmental Management (TCW241)</span>
+                            </h4>
+                            <ul class="text-sm text-slate-600 list-disc list-inside space-y-1">
+                                <li><span class="lang-fr">Capteurs : Sonde 1-Wire (Temp/Air) et humidité sol.</span><span class="lang-en">Sensors: 1-Wire probe (Temp/Air) and soil moisture.</span></li>
+                                <li><span class="lang-fr">Actionneurs : Chauffage, brumisation, arrosage et vasistas.</span><span class="lang-en">Actuators: Heating, misting, watering and window control.</span></li>
+                            </ul>
+                        </div>
+                        <div class="border-l-4 border-green-500 pl-4 space-y-2">
+                            <h4 class="font-bold text-slate-900 uppercase text-sm tracking-wide">
+                                <span class="lang-fr">2. Ressources et Extérieur (Poseidon2)</span>
+                                <span class="lang-en">2. Resources and Exterior (Poseidon2)</span>
+                            </h4>
+                            <ul class="text-sm text-slate-600 list-disc list-inside space-y-1">
+                                <li><span class="lang-fr">Suivi température extérieure et compteur d'eau.</span><span class="lang-en">Outdoor temperature monitoring and water meter.</span></li>
+                                <li><span class="lang-fr">Gestion pompe de relevage et bascule pluie/réseau.</span><span class="lang-en">Lift pump management and rain/main water toggle.</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="lg:col-span-2 space-y-4">
+                    <div class="group relative rounded-2xl overflow-hidden bg-slate-50 border border-slate-200 p-4 cursor-pointer shadow-inner" onclick="openModal('../assets/projets-assets/projet1/diagram-synoptique.jpg')">
+                        <img src="../assets/projets-assets/projet1/diagram-synoptique.jpg" alt="Synoptique" class="w-full h-auto rounded-lg shadow-sm transition-transform duration-500 group-hover:scale-[1.02]" onerror="this.src='https://placehold.co/600x400/f1f5f9/64748b?text=Diagramme+Synoptique';">
+                        <div class="absolute inset-0 bg-blue-600/0 group-hover:bg-blue-600/5 transition-colors flex items-center justify-center">
+                            <i data-lucide="maximize-2" class="text-blue-600 opacity-0 group-hover:opacity-100 transition-opacity w-10 h-10"></i>
+                        </div>
+                    </div>
+                    <p class="text-center text-xs text-slate-400 italic font-medium">
+                        <span class="lang-fr">Schéma synoptique de l'installation</span>
+                        <span class="lang-en">System synoptic diagram</span>
+                    </p>
+                </div>
+            </section>
+
+            <!-- 2. Cas d'Utilisation (UseCase) -->
+            <section class="grid lg:grid-cols-5 gap-12 items-start bg-white p-8 md:p-12 rounded-3xl border border-slate-100 shadow-sm">
+                <div class="lg:col-span-3 space-y-8">
+                    <div>
+                        <h2 class="text-3xl font-bold mb-6 flex items-center gap-3">
+                            <i data-lucide="user-check" class="text-blue-600"></i>
+                            <span class="lang-fr">Analyse Fonctionnelle (UseCase)</span>
+                            <span class="lang-en">Functional Analysis (UseCase)</span>
+                        </h2>
+                        <p class="text-slate-600 leading-relaxed text-justify mb-6">
+                            <span class="lang-fr">Le diagramme de cas d'utilisation définit les interactions entre les différents acteurs (Membres de la Providence, Responsables) et le système automatisé. Il assure une séparation claire entre les fonctions de simple consultation et les droits d'administration critique.</span>
+                            <span class="lang-en">The Use Case diagram defines the interactions between various actors (Providence Members, Managers) and the automated system. It ensures a clear separation between monitoring functions and critical administration rights.</span>
+                        </p>
+                    </div>
+
+                    <div class="grid md:grid-cols-1 gap-8">
+                        <div class="border-l-4 border-blue-500 pl-4 space-y-2">
+                            <h4 class="font-bold text-slate-900 uppercase text-sm tracking-wide">
+                                <span class="lang-fr">1. Droits de Consultation</span>
+                                <span class="lang-en">1. Consultation Rights</span>
+                            </h4>
+                            <ul class="text-sm text-slate-600 list-disc list-inside space-y-1">
+                                <li><span class="lang-fr">Visualisation de l'état de la serre en temps réel via l'interface web.</span><span class="lang-en">Real-time visualization of the greenhouse status via web interface.</span></li>
+                                <li><span class="lang-fr">Chargement et analyse de l'historique des mesures environnementales.</span><span class="lang-en">Loading and analysis of environmental measurement history.</span></li>
+                            </ul>
+                        </div>
+                        <div class="border-l-4 border-red-500 pl-4 space-y-2">
+                            <h4 class="font-bold text-slate-900 uppercase text-sm tracking-wide">
+                                <span class="lang-fr">2. Droits d'Administration</span>
+                                <span class="lang-en">2. Administration Rights</span>
+                            </h4>
+                            <ul class="text-sm text-slate-600 list-disc list-inside space-y-1">
+                                <li><span class="lang-fr">Modification des seuils de régulation (Température, Humidité).</span><span class="lang-en">Modification of regulation thresholds (Temperature, Humidity).</span></li>
+                                <li><span class="lang-fr">Authentification RFID sécurisée pour le contrôle physique des accès.</span><span class="lang-en">Secure RFID authentication for physical access control.</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="lg:col-span-2 space-y-4">
+                    <div class="group relative rounded-2xl overflow-hidden bg-slate-50 border border-slate-200 p-4 cursor-pointer shadow-inner" onclick="openModal('../assets/projets-assets/projet1/diagram-usecase.jpg')">
+                        <img src="../assets/projets-assets/projet1/diagram-usecase.jpg" alt="UseCase" class="w-full h-auto rounded-lg shadow-sm transition-transform duration-500 group-hover:scale-[1.02]" onerror="this.src='https://placehold.co/600x400/f1f5f9/64748b?text=Diagramme+UseCase';">
+                        <div class="absolute inset-0 bg-blue-600/0 group-hover:bg-blue-600/5 transition-colors flex items-center justify-center">
+                            <i data-lucide="maximize-2" class="text-blue-600 opacity-0 group-hover:opacity-100 transition-opacity w-10 h-10"></i>
+                        </div>
+                    </div>
+                    <p class="text-center text-xs text-slate-400 italic font-medium">
+                        <span class="lang-fr">Diagramme des Cas d'Utilisation (UseCase)</span>
+                        <span class="lang-en">Use Case Diagram (UseCase)</span>
+                    </p>
+                </div>
+            </section>
+
+            <!-- 3. Modèle Conceptuel de Donnée (MCD) -->
+            <section class="grid lg:grid-cols-5 gap-12 items-start bg-white p-8 md:p-12 rounded-3xl border border-slate-100 shadow-sm">
+                <div class="lg:col-span-3 space-y-8">
+                    <div>
+                        <h2 class="text-3xl font-bold mb-6 flex items-center gap-3">
+                            <i data-lucide="database" class="text-blue-600"></i>
+                            <span class="lang-fr">Modélisation des Données (MCD)</span>
+                            <span class="lang-en">Data Modeling (MCD)</span>
+                        </h2>
+                        <p class="text-slate-600 leading-relaxed text-justify mb-6">
+                            <span class="lang-fr">La base de données MySQL est le pilier de l'archivage et de l'intelligence du projet. Elle stocke non seulement les logs environnementaux mais aussi la configuration système et les accès de sécurité.</span>
+                            <span class="lang-en">The MySQL database is the pillar of the project's archiving and intelligence. It stores environmental logs as well as system configurations and security access logs.</span>
+                        </p>
+                    </div>
+
+                    <div class="grid md:grid-cols-1 gap-8">
+                        <div class="border-l-4 border-indigo-500 pl-4 space-y-2">
+                            <h4 class="font-bold text-slate-900 uppercase text-sm tracking-wide">
+                                <span class="lang-fr">1. Persistance de la Régulation</span>
+                                <span class="lang-en">1. Regulation Persistence</span>
+                            </h4>
+                            <ul class="text-sm text-slate-600 list-disc list-inside space-y-1">
+                                <li><span class="lang-fr">Table <b>EventsRegulation</b> : Historisation complète des cycles.</span><span class="lang-en">Table <b>EventsRegulation</b>: Complete cycle logging.</span></li>
+                                <li><span class="lang-fr">Table <b>RegulationParameters</b> : Stockage dynamique des seuils.</span><span class="lang-en">Table <b>RegulationParameters</b>: Dynamic threshold storage.</span></li>
+                            </ul>
+                        </div>
+                        <div class="border-l-4 border-purple-500 pl-4 space-y-2">
+                            <h4 class="font-bold text-slate-900 uppercase text-sm tracking-wide">
+                                <span class="lang-fr">2. Sécurité et Traçabilité</span>
+                                <span class="lang-en">2. Security and Traceability</span>
+                            </h4>
+                            <ul class="text-sm text-slate-600 list-disc list-inside space-y-1">
+                                <li><span class="lang-fr">Table <b>AuthorizedAccess</b> : Liste blanche des badges RFID autorisés.</span><span class="lang-en">Table <b>AuthorizedAccess</b>: Whitelist of authorized RFID badges.</span></li>
+                                <li><span class="lang-fr">Table <b>TimestampedAccess</b> : Journalisation horodatée des ouvertures.</span><span class="lang-en">Table <b>TimestampedAccess</b>: Timestamped logs of access events.</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="lg:col-span-2 space-y-4">
+                    <div class="group relative rounded-2xl overflow-hidden bg-slate-50 border border-slate-200 p-4 cursor-pointer shadow-inner" onclick="openModal('../assets/projets-assets/projet1/diagram-mcd.jpg')">
+                        <img src="../assets/projets-assets/projet1/diagram-mcd.jpg" alt="MCD" class="w-full h-auto rounded-lg shadow-sm transition-transform duration-500 group-hover:scale-[1.02]" onerror="this.src='https://placehold.co/600x400/f1f5f9/64748b?text=Diagramme+MCD';">
+                        <div class="absolute inset-0 bg-blue-600/0 group-hover:bg-blue-600/5 transition-colors flex items-center justify-center">
+                            <i data-lucide="maximize-2" class="text-blue-600 opacity-0 group-hover:opacity-100 transition-opacity w-10 h-10"></i>
+                        </div>
+                    </div>
+                    <p class="text-center text-xs text-slate-400 italic font-medium">
+                        <span class="lang-fr">Modèle Conceptuel de Donnée (MCD)</span>
+                        <span class="lang-en">Conceptual Data Model (MCD)</span>
+                    </p>
+                </div>
+            </section>
+
+            <!-- 4. Architecture Logicielle (Classes) -->
+            <section class="grid lg:grid-cols-5 gap-12 items-start bg-white p-8 md:p-12 rounded-3xl border border-slate-100 shadow-sm">
+                <div class="lg:col-span-3 space-y-8">
+                    <div>
+                        <h2 class="text-3xl font-bold mb-6 flex items-center gap-3">
+                            <i data-lucide="code-2" class="text-blue-600"></i>
+                            <span class="lang-fr">Architecture Logicielle (Classes)</span>
+                            <span class="lang-en">Software Architecture (Classes)</span>
+                        </h2>
+                        <p class="text-slate-600 leading-relaxed text-justify mb-6">
+                            <span class="lang-fr">Le back-end en Node.js suit une conception orientée objet rigoureuse. Cette modularité permet d'encapsuler les protocoles de communication bas niveau (Modbus, TCP) dans des drivers réutilisables et testables.</span>
+                            <span class="lang-en">The Node.js back-end follows a rigorous object-oriented design. This modularity allows low-level communication protocols (Modbus, TCP) to be encapsulated in reusable and testable drivers.</span>
+                        </p>
+                    </div>
+
+                    <div class="grid md:grid-cols-1 gap-8">
+                        <div class="border-l-4 border-cyan-500 pl-4 space-y-2">
+                            <h4 class="font-bold text-slate-900 uppercase text-sm tracking-wide">
+                                <span class="lang-fr">1. Gestionnaires Métiers (Managers)</span>
+                                <span class="lang-en">1. Business Managers</span>
+                            </h4>
+                            <ul class="text-sm text-slate-600 list-disc list-inside space-y-1">
+                                <li><span class="lang-fr"><b>WaterManager</b> : Algorithmes de sélection de la source d'eau.</span><span class="lang-en"><b>WaterManager</b>: Water source selection algorithms.</span></li>
+                                <li><span class="lang-fr"><b>RegulationManager</b> : Logique de contrôle des variables hygrothermiques.</span><span class="lang-en"><b>RegulationManager</b>: Control logic for hygrothermal variables.</span></li>
+                            </ul>
+                        </div>
+                        <div class="border-l-4 border-teal-500 pl-4 space-y-2">
+                            <h4 class="font-bold text-slate-900 uppercase text-sm tracking-wide">
+                                <span class="lang-fr">2. Drivers et Hardware</span>
+                                <span class="lang-en">2. Drivers and Hardware</span>
+                            </h4>
+                            <ul class="text-sm text-slate-600 list-disc list-inside space-y-1">
+                                <li><span class="lang-fr"><b>TCW241 / Poseidon</b> : Abstraction des registres Modbus.</span><span class="lang-en"><b>TCW241 / Poseidon</b>: Abstraction of Modbus registers.</span></li>
+                                <li><span class="lang-fr"><b>RFIDReader</b> : Gestion asynchrone des événements de lecture.</span><span class="lang-en"><b>RFIDReader</b>: Asynchronous handling of read events.</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="lg:col-span-2 space-y-4">
+                    <div class="group relative rounded-2xl overflow-hidden bg-slate-50 border border-slate-200 p-4 cursor-pointer shadow-inner" onclick="openModal('../assets/projets-assets/projet1/diagram-class.jpg')">
+                        <img src="../assets/projets-assets/projet1/diagram-class.jpg" alt="Classes" class="w-full h-auto rounded-lg shadow-sm transition-transform duration-500 group-hover:scale-[1.02]" onerror="this.src='https://placehold.co/600x400/f1f5f9/64748b?text=Diagramme+Classe';">
+                        <div class="absolute inset-0 bg-blue-600/0 group-hover:bg-blue-600/5 transition-colors flex items-center justify-center">
+                            <i data-lucide="maximize-2" class="text-blue-600 opacity-0 group-hover:opacity-100 transition-opacity w-10 h-10"></i>
+                        </div>
+                    </div>
+                    <p class="text-center text-xs text-slate-400 italic font-medium">
+                        <span class="lang-fr">Diagramme de Classes (Backend Node.js)</span>
+                        <span class="lang-en">Class Diagram (Node.js Backend)</span>
+                    </p>
+                </div>
+            </section>
+
+            <!-- Technical Challenges -->
+            <section class="space-y-8">
+                <h2 class="text-3xl font-bold text-center">
+                    <span class="lang-fr">Défis & Résolution</span>
+                    <span class="lang-en">Challenges & Resolution</span>
+                </h2>
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="bg-red-50 p-8 rounded-3xl border border-red-100">
+                        <h4 class="font-bold text-red-700 mb-4 flex items-center gap-2 text-justify">
+                            <i data-lucide="alert-triangle"></i>
+                            <span class="lang-fr">Problématique Initiale</span>
+                            <span class="lang-en">Initial Problems</span>
+                        </h4>
+                        <p class="text-sm text-red-800 opacity-80 leading-relaxed text-justify">
+                            <span class="lang-fr">Système obsolète avec câblages et borniers défectueux. Documentation technique Poseidon inexistante/obsolète pour le modèle spécifique utilisé.</span>
+                            <span class="lang-en">Outdated system with faulty wiring and terminals. Non-existent or obsolete Poseidon technical documentation for the specific model used.</span>
+                        </p>
+                    </div>
+                    <div class="bg-green-50 p-8 rounded-3xl border border-green-100 text-justify">
+                        <h4 class="font-bold text-green-700 mb-4 flex items-center gap-2">
+                            <i data-lucide="check-circle"></i>
+                            <span class="lang-fr">Actions Correctives</span>
+                            <span class="lang-en">Corrective Actions</span>
+                        </h4>
+                        <p class="text-sm text-green-800 opacity-80 leading-relaxed text-justify">
+                            <span class="lang-fr">Audit complet de l'infrastructure, remise en état physique des capteurs. Reverse-engineering des trames Modbus brutes pour rétablir la communication avec le serveur.</span>
+                            <span class="lang-en">Complete infrastructure audit, physical repair of sensors. Reverse-engineering of raw Modbus frames to restore communication with the server.</span>
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Functional focus (Code snippet style) -->
+            <section class="bg-slate-900 rounded-3xl p-8 md:p-12 text-white overflow-hidden relative">
+                <div class="relative z-10 grid md:grid-cols-2 gap-12 items-center">
+                    <div>
+                        <h3 class="text-2xl font-bold mb-6">
+                            <span class="lang-fr text-blue-400">Communication Modbus TCP</span>
+                            <span class="lang-en text-blue-400">Modbus TCP Communication</span>
+                        </h3>
+                        <p class="text-slate-400 mb-6 leading-relaxed text-justify">
+                            <span class="lang-fr">Le pilotage de la serre repose sur une gestion asynchrone des trames TCP. Cet extrait illustre l'encapsulation de la logique métier : lecture directe des registres, conversion des données binaires en valeurs physiques et gestion robuste des erreurs (timeout, socket).</span>
+                            <span class="lang-en">Greenhouse control relies on asynchronous management of TCP frames. This snippet illustrates the encapsulation of business logic: direct register reading, binary data conversion into physical values, and robust error handling (timeout, socket).</span>
+                        </p>
+                        <a href="https://github.com/Stanislaws-Legrand/ProjetSerre-BTSCIEL2025" target="_blank" class="flex items-center gap-4 text-sm font-mono text-blue-400 bg-slate-800/50 p-5 rounded-2xl border border-slate-700 hover:bg-slate-800 hover:border-blue-500 transition-all group shadow-inner">
+                            <i data-lucide="code" class="group-hover:scale-110 transition-transform w-6 h-6"></i>
+                            <div class="flex flex-col">
+                                <span class="lang-fr font-bold">En savoir plus ?</span>
+                                <span class="lang-en font-bold">Want to know more?</span>
+                                <span class="text-xs opacity-60 lang-fr">Consulter le code source du projet</span>
+                                <span class="text-xs opacity-60 lang-en">View project source code</span>
+                            </div>
+                            <i data-lucide="external-link" class="w-4 h-4 ml-auto opacity-30 group-hover:opacity-100 transition-opacity"></i>
+                        </a>
+                    </div>
+                    <div class="bg-slate-800 rounded-2xl p-6 font-mono text-xs text-blue-300 border border-slate-700 shadow-2xl overflow-x-auto">
+                        <div class="flex gap-2 mb-4">
+                            <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                            <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+                            <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                        </div>
+                        <pre><code>
+// CAPTEUR TEMPERATURE EXTERIEUR :
+async readoutdoorTemperature() {
+    return new Promise((resolve, reject) => {
+        const client = new net.Socket();
+        client.setTimeout(5000);
+
+        // Trame TCP brute :'00 00 00 00 00 04 02 04 00 64 00 01'
+        const request = Buffer.from([
+            0x00, 0x00, // Transaction ID
+            0x00, 0x00, // Protocol ID
+            0x00, 0x04, // Length
+            0x02,       // Unit ID
+            0x04,       // Function Code (Read Input)
+            0x00, 0x64, // Register Address (100)
+            0x00, 0x01  // Quantity 
+        ]);
+
+        client.connect(this.port, this.ip, () => {
+            client.write(request);
+        });
+
+        client.on('data', (data) => {
+            const high = data[9];
+            const low = data[10];
+            const value = (high << 8) | low;
+            const outdoorTemperature = value / 10;
+
+            client.destroy();
+            resolve(outdoorTemperature);
+        });
+
+        client.on('error', (err) => {
+            client.destroy();
+            reject("Error TCP (Capteur Extérieur): "+ err.message);
+        });
+
+        client.on('timeout', () => {
+            client.destroy();
+            reject(new Error("Timeout - capteur extérieur"));
+        });
+    });
+}
+</code></pre>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+
+        <!-- Footer -->
+        <footer class="bg-slate-900 text-white py-12 border-t border-slate-800">
+            <div class="max-w-6xl mx-auto px-6 text-center">
+                <p class="text-slate-500 text-sm">© 2026 Stanislas Legrand - <span class="lang-fr">Projet Serre Connectée</span><span class="lang-en">Connected Greenhouse Project</span></p>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        lucide.createIcons();
+
+        function toggleLanguage() {
+            const html = document.documentElement;
+            const btnText = document.getElementById('lang-btn-text');
+            
+            if (html.lang === 'fr') {
+                html.lang = 'en';
+                btnText.innerText = 'FR';
+            } else {
+                html.lang = 'fr';
+                btnText.innerText = 'EN';
+            }
+        }
+
+        // Fonctions pour la Modal
+        function openModal(imgSrc) {
+            const modal = document.getElementById('imageModal');
+            const modalImg = document.getElementById('modalImage');
+            const content = document.getElementById('pageContent');
+            
+            modalImg.src = imgSrc;
+            modal.classList.remove('hidden');
+            
+            // Petit délai pour l'animation d'opacité
+            setTimeout(() => {
+                modal.classList.remove('opacity-0');
+                content.classList.add('blur-content');
+            }, 10);
+            
+            document.body.style.overflow = 'hidden'; // Empêche le scroll
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('imageModal');
+            const content = document.getElementById('pageContent');
+            
+            modal.classList.add('opacity-0');
+            content.classList.remove('blur-content');
+            
+            setTimeout(() => {
+                modal.classList.add('hidden');
+                document.body.style.overflow = 'auto';
+            }, 300);
+        }
+
+        // Fermeture avec la touche Echap
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeModal();
+        });
+    </script>
+</body>
+</html>
