@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stanislas LEGRAND | Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        /* FIX: Force la disparition de la langue inactive */
+        html[lang="fr"] .lang-en { display: none !important; }
+        html[lang="en"] .lang-fr { display: none !important; }
+        
+        .glass {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(229, 231, 235, 0.5);
+        }
+
+        .gradient-text {
+            background: linear-gradient(90deg, #2563eb, #7c3aed);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .card-hover:hover {
+            transform: translateY(-5px);
+            transition: all 0.3s ease;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-900">
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 glass">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="flex justify-between h-20 items-center">
+                <div class="flex-shrink-0 flex items-center gap-2 font-bold text-xl tracking-tight">
+                    <div class="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center text-white text-sm font-bold">SL</div>
+                    <span class="hidden sm:block">Stanislas<span class="text-blue-600"> Portfolio</span></span>
+                </div>
+                
+                <div class="hidden md:block">
+                    <div class="flex items-center space-x-6">
+                        <a href="#about" class="hover:text-blue-600 text-sm font-semibold transition-colors">
+                            <span class="lang-fr">À propos</span><span class="lang-en">About</span>
+                        </a>
+                        <span class="text-slate-300 select-none">|</span>
+                        <a href="#projects" class="hover:text-blue-600 text-sm font-semibold transition-colors">
+                            <span class="lang-fr">Projets</span><span class="lang-en">Projects</span>
+                        </a>
+                        <span class="text-slate-300 select-none">|</span>
+                        <a href="#experience" class="hover:text-blue-600 text-sm font-semibold transition-colors">
+                            <span class="lang-fr">Expériences Professionnelles</span><span class="lang-en">Jobs Experiences</span>
+                        </a>
+                        <span class="text-slate-300 select-none">|</span>
+                        <a href="#education" class="hover:text-blue-600 text-sm font-semibold transition-colors">
+                            <span class="lang-fr">Parcours Académique</span><span class="lang-en">Education</span>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="flex items-center space-x-4">
+                    <button onclick="toggleLanguage()" class="flex items-center gap-2 px-3 py-1.5 rounded-full border border-slate-300 hover:bg-slate-100 transition-all font-bold text-xs uppercase">
+                        <i data-lucide="languages" class="w-4 h-4 text-blue-600"></i>
+                        <span id="lang-btn-text">EN</span>
+                    </button>
+                    <button onclick="openGmail()" class="bg-blue-600 text-white px-5 py-2 rounded-xl text-sm font-bold hover:bg-blue-700 transition-all shadow-lg shadow-blue-200">
+                        <span class="lang-fr">Me Contacter</span><span class="lang-en">Contact Me</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="pt-40 pb-20 px-6">
+        <div class="max-w-4xl mx-auto text-center">
+            <div class="inline-block px-4 py-1.5 mb-6 text-xs font-bold tracking-widest text-blue-600 bg-blue-50 rounded-full uppercase border border-blue-100">
+                <span class="lang-fr">Candidat en Mastère à la recherche d'une Alternance (BAC+5)</span>
+                <span class="lang-en">Master's Degree Candidate looking for an Apprenticeship (BAC+5)</span>
+            </div>
+            <h1 class="text-5xl md:text-7xl font-extrabold text-slate-900 mb-6 tracking-tight">
+                <span class="lang-fr text-slate-900">Manager en Architecture & Applications Logicielles des SI</span>
+                <span class="lang-en text-slate-900">IT Architecture and Software Applications Manager</span>
+            </h1>
+            <p class="text-xl text-slate-600 mb-10 max-w-2xl mx-auto leading-relaxed">
+                <span class="lang-fr">
+                    Actuellement <b>Alternant Business Analyst IT</b> chez <i>Airbus Atlantic</i>. Je recherche une <b>alternance de 24 mois</b> pour mon Mastère Manager des SI.
+                </span>
+                <span class="lang-en">
+                    Currently <b>IT Business Analyst Apprentice</b> at <i>Airbus Atlantic</i>. Seeking a <b>2-year apprenticeship</b> for my Master's in IT Management.
+                </span>
+            </p>
+            <div class="flex flex-wrap justify-center gap-4">
+                <div class="flex items-center text-slate-500 bg-white px-5 py-2.5 rounded-full shadow-sm border border-slate-100">
+                    <i data-lucide="map-pin" class="w-4 h-4 mr-2 text-blue-500"></i>
+                    Amiens (80000) | Hauts-de-France 
+                </div>
+                <div class="flex items-center text-slate-500 bg-white px-5 py-2.5 rounded-full shadow-sm border border-slate-100">
+                    <i data-lucide="award" class="w-4 h-4 mr-2 text-blue-500"></i>
+                    Cambridge English Certificate
+                </div>
+                <div class="flex items-center text-slate-500 bg-white px-5 py-2.5 rounded-full shadow-sm border border-slate-100">
+                    <i data-lucide="car" class="w-4 h-4 mr-2 text-blue-500"></i>
+                    Permis B
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-white">
+        <div class="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-16 items-center">
+            <div class="relative">
+                <div class="aspect-square rounded-3xl bg-slate-100 overflow-hidden shadow-2xl border-8 border-white">
+                    <img src="assets/pfp.jpg" alt="Stanislas Legrand" class="w-full h-full object-cover" onerror="this.parentElement.innerHTML='<div class=\'w-full h-full flex items-center justify-center text-slate-300\'><i data-lucide=\'user\' class=\'w-24 h-24\'></i></div>'; lucide.createIcons();">
+                </div>
+                <div class="absolute -bottom-8 -right-8 glass p-8 rounded-2xl shadow-xl border-l-4 border-blue-600">
+                    <p class="font-bold text-3xl text-slate-900">3+</p>
+                    <p class="text-sm font-semibold text-slate-600 lang-fr">Années d'études IT</p>
+                    <p class="text-sm font-semibold text-slate-600 lang-en">Years of IT Studies</p>
+                </div>
+            </div>
+            <div>
+                <h2 class="text-3xl font-bold mb-8 flex items-center gap-3">
+                    <i data-lucide="user-check" class="text-blue-600"></i>
+                    <span class="lang-fr">Mon Profil</span>
+                    <span class="lang-en">My Profile</span>
+                </h2>
+                <div class="space-y-6 text-slate-600 leading-relaxed text-lg">
+                    <p class="lang-fr">En fin de cycle Bachelor Chef de projet, je combine une expertise technique acquise en BTS CIEL avec une vision stratégique développée chez <strong>Airbus Atlantic</strong>.</p>
+                    <p class="lang-en">Completing my Bachelor's as a Project Lead, I combine technical expertise from my BTS CIEL with a strategic vision developed at <strong>Airbus Atlantic</strong>.</p>
+                    
+                    <p class="lang-fr">Ma mission ? Faire le pont entre les besoins métiers complexes et les solutions d'architecture logicielles innovantes pour optimiser la performance des SI.</p>
+                    <p class="lang-en">My mission? Bridging the gap between complex business needs and innovative software architecture solutions to optimize IS performance.</p>
+                </div>
+                <div class="mt-10 grid grid-cols-2 gap-6">
+                    <div class="p-5 rounded-2xl bg-slate-50 border border-slate-100">
+                        <h4 class="font-bold text-blue-600 mb-1">Français</h4>
+                        <p class="text-sm font-medium lang-fr">Langue Maternelle</p>
+                        <p class="text-sm font-medium lang-en">Native Speaker</p>
+                    </div>
+                    <div class="p-5 rounded-2xl bg-slate-50 border border-slate-100">
+                        <h4 class="font-bold text-blue-600 mb-1">English</h4>
+                        <p class="text-sm font-medium lang-fr">Niveau C1 (Cambridge)</p>
+                        <p class="text-sm font-medium lang-en">C1 Level (Cambridge)</p>
+                    </div>
+                    <div class="p-5 rounded-2xl bg-slate-50 border border-slate-100">
+                        <h4 class="font-bold text-blue-600 mb-1">Español</h4>
+                        <p class="text-sm font-medium lang-fr">Niveau B1</p>
+                        <p class="text-sm font-medium lang-en">B1 Level</p>
+                    </div>
+                    <div class="p-5 rounded-2xl bg-slate-50 border border-slate-100">
+                        <h4 class="font-bold text-blue-600 mb-1">Mandarin</h4>
+                        <p class="text-sm font-medium lang-fr">Niveau A1</p>
+                        <p class="text-sm font-medium lang-en">A1 Level</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-20 bg-slate-50">
+        <div class="max-w-6xl mx-auto px-6">
+            <h2 class="text-3xl font-bold mb-12 flex items-center gap-3">
+                <i data-lucide="folder-kanban" class="text-blue-600"></i>
+                <span class="lang-fr">Projets Phares</span>
+                <span class="lang-en">Key Projects</span>
+            </h2>
+            <div class="grid md:grid-cols-2 gap-10">
+                <!-- Case Study 1 -->
+                <a href="projets-html/projet1.html" class="group bg-white overflow-hidden rounded-3xl border border-slate-200 shadow-sm hover:shadow-xl transition-all card-hover block">
+                    <div class="aspect-video bg-green-50 flex items-center justify-center group-hover:bg-blue-100 transition-all overflow-hidden relative">
+                        <!-- Image avec fallback vers l'icône Lucide -->
+                        <img src="assets/projeticon1.jpg" alt="Projet Serre" class="w-full h-full object-cover" onerror="this.style.display='none'; this.nextElementSibling.classList.remove('hidden');">
+                        <i data-lucide="sprout" class="w-16 h-16 text-green-300 hidden"></i>
+                    </div>
+                    <div class="p-8">
+                        <div class="flex gap-2 mb-4">
+                            <span class="px-3 py-1 bg-green-50 text-green-600 text-[10px] font-bold rounded-full uppercase">HTML&CSS</span>
+                            <span class="px-3 py-1 bg-slate-100 text-slate-600 text-[10px] font-bold rounded-full uppercase">Node.js</span>
+                            <span class="px-3 py-1 bg-green-50 text-green-600 text-[10px] font-bold rounded-full uppercase">Modbus TCP</span>
+                            <span class="px-3 py-1 bg-slate-100 text-slate-600 text-[10px] font-bold rounded-full uppercase">SQL</span>
+                            <span class="px-3 py-1 bg-green-50 text-green-600 text-[10px] font-bold rounded-full uppercase">IOT</span>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3">
+                            <span class="lang-fr">Projet Serre Autonome & Connectée</span>
+                            <span class="lang-en">Autonomous & Connected Greenhouse Project</span> 
+                        </h3>
+                        <p class="text-slate-600 text-sm mb-6 leading-relaxed">
+                            <span class="lang-fr">Conception et développement d'un système de gestion automatisé pour une serre pédagogique, intégrant la régulation hygrothermique et la gestion intelligente des ressources en eau.</span>
+                            <span class="lang-en">Design and development of an automated management system for a pedagogical greenhouse, integrating hygrothermal regulation and intelligent water resource management.</span>
+                        </p>
+                    </div>
+                </a>
+                <!-- Case Study 2 -->
+                <a href="projets/projet2" class="group bg-white overflow-hidden rounded-3xl border border-slate-200 shadow-sm hover:shadow-xl transition-all card-hover block">
+                    <div class="aspect-video bg-orange-50 flex items-center justify-center group-hover:bg-orange-100 transition-all overflow-hidden relative">
+                        <!-- Image avec fallback vers l'icône Lucide -->
+                        <img src="assets/projeticon2" alt="WIP" class="w-full h-full object-cover" onerror="this.style.display='none'; this.nextElementSibling.classList.remove('hidden');">
+                        <i data-lucide="traffic-cone" class="w-16 h-16 text-orange-300 hidden"></i>
+                    </div>
+                    <div class="p-8">
+                        <div class="flex gap-2 mb-4">
+                            <span class="px-3 py-1 bg-orange-50 text-orange-600 text-[10px] font-bold rounded-full uppercase">WIP</span>
+                            <span class="px-3 py-1 bg-slate-100 text-slate-600 text-[10px] font-bold rounded-full uppercase"></span>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3">Work In Progress</h3>
+                        <p class="text-slate-600 text-sm mb-6 leading-relaxed">
+                            <span class="lang-fr">WIP</span>
+                            <span class="lang-en">WIP</span>
+                        </p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section (Refined) -->
+    <section id="experience" class="py-20 bg-white">
+        <div class="max-w-6xl mx-auto px-6">
+            <h2 class="text-3xl font-bold mb-16 text-center">
+                <i data-lucide="briefcase-business" class="inline-block text-blue-600 mb-2"></i><br>
+                <span class="lang-fr">Expériences Professionnelles</span>
+                <span class="lang-en">Professional Experience</span>
+            </h2>
+            
+            <div class="space-y-24">
+                <!-- Airbus Atlantic -->
+                <div class="relative pl-8 border-l-2 border-blue-600 exp-card">
+                    <div class="absolute -left-[9px] top-0 w-4 h-4 bg-blue-600 rounded-full ring-4 ring-blue-50"></div>
+                    <div class="flex flex-wrap justify-between items-start mb-10">
+                        <div>
+                            <h4 class="text-3xl font-extrabold text-slate-900 tracking-tight">Alternant Business Analyst IT</h4>
+                            <p class="text-blue-600 font-bold text-xl uppercase tracking-wider mt-1">AIRBUS ATLANTIC — Méaulte (80300)</p>
+                        </div>
+                        <span class="bg-blue-600 text-white text-xs font-black px-5 py-2 rounded-full uppercase tracking-widest shadow-md mt-4 md:mt-0">
+                            <span class="lang-fr">Depuis Septembre 2025</span>
+                            <span class="lang-en">Since September 2025</span>
+                        </span>
+                    </div>
+                    
+                    <div class="grid md:grid-cols-3 gap-10">
+                        <div class="space-y-4">
+                            <h5 class="font-bold text-slate-900 flex items-center gap-2 border-b-2 border-blue-100 pb-2">
+                                <i data-lucide="calendar-check-2" class="w-5 h-5 text-blue-600"></i>
+                                <span class="lang-fr text-sm uppercase">Pilotage & Gouvernance Agile</span>
+                                <span class="lang-en text-sm uppercase">Agile Steering & Governance</span>
+                            </h5>
+                            <ul class="text-sm text-slate-600 space-y-3 text-justify">
+                                <li><span class="lang-fr"><b>SDLC :</b> Structuration des phases (Waterfall/Agile) selon les standards Airbus.</span><span class="lang-en"><b>SDLC:</b> Phase structuring (Waterfall/Agile) following Airbus standards.</span></li>
+                                <li><span class="lang-fr"><b>Jalons :</b> Suivi du chemin critique pour garantir le On-Time Delivery (OTD).</span><span class="lang-en"><b>Milestones:</b> Critical path monitoring to ensure On-Time Delivery (OTD).</span></li>
+                                <li><span class="lang-fr"><b>Rituels :</b> Animation de Daily meetings et alignement IT / Clients internes.</span><span class="lang-en"><b>Rituals:</b> Leading Daily meetings and IT / Internal Client alignment.</span></li>
+                            </ul>
+                        </div>
+                        <div class="space-y-4">
+                            <h5 class="font-bold text-slate-900 flex items-center gap-2 border-b-2 border-blue-100 pb-2">
+                                <i data-lucide="trending-up" class="w-5 h-5 text-blue-600"></i>
+                                <span class="lang-fr text-sm uppercase">Ressources & Pilotage Financier</span>
+                                <span class="lang-en text-sm uppercase">Resources & Finance</span>
+                            </h5>
+                            <ul class="text-sm text-slate-600 space-y-3 text-justify">
+                                <li><span class="lang-fr"><b>Capacité :</b> Planning de charge et affectation stratégique des profils techniques.</span><span class="lang-en"><b>Capacity:</b> Workload planning and strategic allocation of technical profiles.</span></li>
+                                <li><span class="lang-fr"><b>Finances :</b> Monitoring CAPEX/OPEX et analyse d'écarts (Budget vs Actual).</span><span class="lang-en"><b>Finance:</b> CAPEX/OPEX monitoring and variance analysis (Budget vs Actual).</span></li>
+                                <li><span class="lang-fr"><b>PMO :</b> Utilisation avancée de Jira, Planview et SAP pour la donnée projet.</span><span class="lang-en"><b>PMO:</b> Advanced use of Jira, Planview, and SAP for project data.</span></li>
+                            </ul>
+                        </div>
+                        <div class="space-y-4">
+                            <h5 class="font-bold text-slate-900 flex items-center gap-2 border-b-2 border-blue-100 pb-2">
+                                <i data-lucide="shield-alert" class="w-5 h-5 text-blue-600"></i>
+                                <span class="lang-fr text-sm uppercase">Risques & Résilience</span>
+                                <span class="lang-en text-sm uppercase">Risks & Resilience</span>
+                            </h5>
+                            <ul class="text-sm text-slate-600 space-y-3 text-justify">
+                                <li><span class="lang-fr"><b>Proactivité :</b> Cartographie des risques (techniques/humains) dès le cadrage.</span><span class="lang-en"><b>Proactive:</b> Risk mapping (technical/human) starting from the scoping phase.</span></li>
+                                <li><span class="lang-fr"><b>Change Mgmt :</b> Plans de mitigation et gestion des imprévus critiques.</span><span class="lang-en"><b>Change Mgmt:</b> Mitigation plans and critical incident management.</span></li>
+                                <li><span class="lang-fr"><b>Qualité :</b> Veille à la conformité et sécurité du secteur aéronautique.</span><span class="lang-en"><b>Quality:</b> Ensuring aeronautical sector compliance and security.</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- La Poste -->
+                <div class="relative pl-8 border-l-2 border-slate-200 exp-card">
+                    <div class="absolute -left-[9px] top-0 w-4 h-4 bg-slate-400 rounded-full ring-4 ring-slate-50"></div>
+                    <div class="flex flex-wrap justify-between items-start mb-10">
+                        <div>
+                            <h4 class="text-3xl font-extrabold text-slate-900 tracking-tight">Stagiaire Technicien DATA</h4>
+                            <p class="text-blue-600 font-bold text-xl uppercase tracking-wider mt-1">LA POSTE — Amiens (80000)</p>
+                        </div>
+                        <span class="bg-slate-100 text-slate-600 text-xs font-bold px-5 py-2 rounded-full uppercase tracking-widest mt-4 md:mt-0">
+                            Mai 2024 - Août 2024
+                        </span>
+                    </div>
+                    
+                    <div class="grid md:grid-cols-3 gap-10">
+                        <div class="space-y-4">
+                            <h5 class="font-bold text-slate-900 flex items-center gap-2 border-b pb-2">
+                                <i data-lucide="database" class="w-5 h-5 text-blue-500"></i>
+                                <span class="lang-fr text-sm uppercase">Gouvernance Data</span>
+                                <span class="lang-en text-sm uppercase">Data Governance</span>
+                            </h5>
+                            <ul class="text-sm text-slate-600 space-y-3 text-justify">
+                                <li><span class="lang-fr"><b>Audit :</b> Diagnostic approfondi des anomalies et doublons clients.</span><span class="lang-en"><b>Audit:</b> In-depth diagnostic of client anomalies and duplicates.</span></li>
+                                <li><span class="lang-fr"><b>Nettoyage :</b> Pilotage de mises à jour massives (Single Source of Truth).</span><span class="lang-en"><b>Cleansing:</b> Managing massive updates (Single Source of Truth).</span></li>
+                            </ul>
+                        </div>
+                        <div class="space-y-4">
+                            <h5 class="font-bold text-slate-900 flex items-center gap-2 border-b pb-2">
+                                <i data-lucide="users-2" class="w-5 h-5 text-blue-500"></i>
+                                <span class="lang-fr text-sm uppercase">Interface Métier</span>
+                                <span class="lang-en text-sm uppercase">Business Interface</span>
+                            </h5>
+                            <ul class="text-sm text-slate-600 space-y-3 text-justify">
+                                <li><span class="lang-fr"><b>Support :</b> Traduction des besoins terrain en règles de gestion de données.</span><span class="lang-en"><b>Support:</b> Translating field needs into data management rules.</span></li>
+                                <li><span class="lang-fr"><b>Médiation :</b> Vulgarisation des enjeux Data pour les non-techniciens.</span><span class="lang-en"><b>Mediation:</b> Data stakes simplification for non-technical users.</span></li>
+                            </ul>
+                        </div>
+                        <div class="space-y-4">
+                            <h5 class="font-bold text-slate-900 flex items-center gap-2 border-b pb-2">
+                                <i data-lucide="bar-chart-big" class="w-5 h-5 text-blue-500"></i>
+                                <span class="lang-fr text-sm uppercase">Reporting & KPIs</span>
+                                <span class="lang-en text-sm uppercase">Reporting & KPIs</span>
+                            </h5>
+                            <ul class="text-sm text-slate-600 space-y-3 text-justify">
+                                <li><span class="lang-fr"><b>Analytics :</b> Tableaux de bord (Power BI) de suivi du taux d'erreur.</span><span class="lang-en"><b>Analytics:</b> Dashboards (Power BI) for error rate tracking.</span></li>
+                                <li><span class="lang-fr"><b>Process :</b> Proposition d'automatisations des tâches de contrôle récurrentes.</span><span class="lang-en"><b>Process:</b> Proposing automation for recurring control tasks.</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Agrisanterre -->
+                <div class="relative pl-8 border-l-2 border-slate-200 exp-card">
+                    <div class="absolute -left-[9px] top-0 w-4 h-4 bg-slate-300 rounded-full ring-4 ring-slate-50"></div>
+                    <div class="flex flex-wrap justify-between items-start mb-10">
+                        <div>
+                            <h4 class="text-3xl font-extrabold text-slate-900 tracking-tight">Réceptionniste / Conseiller</h4>
+                            <p class="text-blue-600 font-bold text-xl uppercase tracking-wider mt-1">AGRISANTERRE — Roye (80700)</p>
+                        </div>
+                        <span class="bg-slate-100 text-slate-500 text-xs font-bold px-5 py-2 rounded-full uppercase tracking-widest mt-4 md:mt-0">
+                            Juin 2023 - Août 2023
+                        </span>
+                    </div>
+                    
+                    <div class="grid md:grid-cols-3 gap-10">
+                        <div class="space-y-4">
+                            <h5 class="font-bold text-slate-900 flex items-center gap-2 border-b pb-2">
+                                <i data-lucide="handshake" class="w-5 h-5 text-blue-400"></i>
+                                <span class="lang-fr text-sm uppercase">Relation Client</span>
+                                <span class="lang-en text-sm uppercase">Customer Relations</span>
+                            </h5>
+                            <ul class="text-sm text-slate-600 space-y-3 text-justify">
+                                <li><span class="lang-fr"><b>Conseil :</b> Accueil teléphonique et orientation vers les services experts.</span><span class="lang-en"><b>Advice:</b> Phone reception and routing to expert services.</span></li>
+                                <li><span class="lang-fr"><b>Ambassadeur :</b> Gestion de l'image de marque auprès de clients pros.</span><span class="lang-en"><b>Ambassador:</b> Managing brand image with professional clients.</span></li>
+                            </ul>
+                        </div>
+                        <div class="space-y-4">
+                            <h5 class="font-bold text-slate-900 flex items-center gap-2 border-b pb-2">
+                                <i data-lucide="truck" class="w-5 h-5 text-blue-400"></i>
+                                <span class="lang-fr text-sm uppercase">Pilotage Logistique</span>
+                                <span class="lang-en text-sm uppercase">Logistics Steering</span>
+                            </h5>
+                            <ul class="text-sm text-slate-600 space-y-3 text-justify">
+                                <li><span class="lang-fr"><b>Supply Chain :</b> Coordination transporteurs et supervision des stocks.</span><span class="lang-en"><b>Supply Chain:</b> Carrier coordination and stock supervision.</span></li>
+                                <li><span class="lang-fr"><b>Douanes :</b> Vérification de la liasse documentaire (CMR, BL).</span><span class="lang-en"><b>Customs:</b> Transport document verification (CMR, BL).</span></li>
+                            </ul>
+                        </div>
+                        <div class="space-y-4">
+                            <h5 class="font-bold text-slate-900 flex items-center gap-2 border-b pb-2">
+                                <i data-lucide="settings-2" class="w-5 h-5 text-blue-400"></i>
+                                <span class="lang-fr text-sm uppercase">Support Opérationnel</span>
+                                <span class="lang-en text-sm uppercase">Operational Support</span>
+                            </h5>
+                            <ul class="text-sm text-slate-600 space-y-3 text-justify">
+                                <li><span class="lang-fr"><b>Litiges :</b> Traitement des anomalies de livraison et avaries.</span><span class="lang-en"><b>Disputes:</b> Handling delivery anomalies and damages.</span></li>
+                                <li><span class="lang-fr"><b>Organisation :</b> Optimisation physique des flux en zone déchargement.</span><span class="lang-en"><b>Organization:</b> Physical flow optimization in unloading zones.</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education Section -->
+    <section id="education" class="py-20 bg-white">
+        <div class="max-w-6xl mx-auto px-6">
+            <h2 class="text-3xl font-bold mb-16 text-center">
+                <i data-lucide="graduation-cap" class="inline-block text-blue-600 mb-2"></i><br>
+                <span class="lang-fr">Parcours Académique</span>
+                <span class="lang-en">Academic Journey</span>
+            </h2>
+
+            <div class="space-y-20">
+                <!-- Bachelor -->
+                <div class="relative pl-8 border-l-2 border-blue-600">
+                    <div class="absolute -left-[9px] top-0 w-4 h-4 bg-blue-600 rounded-full"></div>
+                    <div class="flex flex-wrap justify-between items-start mb-8">
+                        <div>
+                            <h4 class="text-2xl font-bold text-slate-900">Bachelor Chef de Projet Informatique</h4>
+                            <p class="text-blue-600 font-bold text-lg uppercase tracking-wide">La Providence — Amiens | 2025 - 2026</p>
+                        </div>
+                    </div>
+
+                    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                        <div class="bg-slate-50 p-5 rounded-2xl border border-slate-100">
+                            <h5 class="font-bold text-slate-900 mb-3 flex items-center gap-2">
+                                <i data-lucide="clipboard-check" class="w-4 h-4 text-blue-600"></i>
+                                <span class="lang-fr text-xs uppercase tracking-wider">Pilotage IT</span>
+                                <span class="lang-en text-xs uppercase tracking-wider">IT Steering</span>
+                            </h5>
+                            <p class="text-xs text-slate-600">
+                                <span class="lang-fr">Agile/Scrum, Cycle en V. Cadrage et planification Gantt.</span>
+                                <span class="lang-en">Agile/Scrum, V-Model. Scoping and Gantt planning.</span>
+                            </p>
+                        </div>
+                        <div class="bg-slate-50 p-5 rounded-2xl border border-slate-100">
+                            <h5 class="font-bold text-slate-900 mb-3 flex items-center gap-2">
+                                <i data-lucide="network" class="w-4 h-4 text-blue-600"></i>
+                                <span class="lang-fr text-xs uppercase tracking-wider">Architecture</span>
+                                <span class="lang-en text-xs uppercase tracking-wider">Architecture</span>
+                            </h5>
+                            <p class="text-xs text-slate-600">
+                                <span class="lang-fr">Conception infrastructures réseaux sécurisées et virtualisation.</span>
+                                <span class="lang-en">Secure network infrastructure design and virtualization.</span>
+                            </p>
+                        </div>
+                        <div class="bg-slate-50 p-5 rounded-2xl border border-slate-100">
+                            <h5 class="font-bold text-slate-900 mb-3 flex items-center gap-2">
+                                <i data-lucide="settings-2" class="w-4 h-4 text-blue-600"></i>
+                                <span class="lang-fr text-xs uppercase tracking-wider">Gouvernance</span>
+                                <span class="lang-en text-xs uppercase tracking-wider">Governance</span>
+                            </h5>
+                            <p class="text-xs text-slate-600">
+                                <span class="lang-fr">Analyse besoins métiers et rédaction cahiers des charges.</span>
+                                <span class="lang-en">Business needs analysis and requirements writing.</span>
+                            </p>
+                        </div>
+                        <div class="bg-slate-50 p-5 rounded-2xl border border-slate-100">
+                            <h5 class="font-bold text-slate-900 mb-3 flex items-center gap-2">
+                                <i data-lucide="users" class="w-4 h-4 text-blue-600"></i>
+                                <span class="lang-fr text-xs uppercase tracking-wider">Management</span>
+                                <span class="lang-en text-xs uppercase tracking-wider">Management</span>
+                            </h5>
+                            <p class="text-xs text-slate-600">
+                                <span class="lang-fr">Leadership, communication transverse et coordination.</span>
+                                <span class="lang-en">Leadership, cross-communication, and coordination.</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- BTS CIEL -->
+                <div class="relative pl-8 border-l-2 border-slate-200">
+                    <div class="absolute -left-[9px] top-0 w-4 h-4 bg-slate-200 rounded-full"></div>
+                    <div class="flex flex-wrap justify-between items-start mb-8">
+                        <div>
+                            <h4 class="text-2xl font-bold text-slate-900">BTS CIEL (Cyber, IT, Électronique)</h4>
+                            <p class="text-blue-600 font-bold text-lg uppercase tracking-wide">La Providence — Amiens | 2023 - 2025</p>
+                        </div>
+                    </div>
+
+                    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                        <div class="bg-slate-50 p-5 rounded-2xl border border-slate-100">
+                            <h5 class="font-bold text-slate-900 mb-3 flex items-center gap-2">
+                                <i data-lucide="shield-alert" class="w-4 h-4 text-slate-600"></i>
+                                <span class="lang-fr text-xs uppercase tracking-wider">Cyber-Sécurité</span>
+                                <span class="lang-en text-xs uppercase tracking-wider">Cyber-Security</span>
+                            </h5>
+                            <p class="text-xs text-slate-600 leading-relaxed">
+                                <span class="lang-fr">Cyber-protocoles et détection vulnérabilités.</span>
+                                <span class="lang-en">Cyber-protocols and vulnerability detection.</span>
+                            </p>
+                        </div>
+                        <div class="bg-slate-50 p-5 rounded-2xl border border-slate-100">
+                            <h5 class="font-bold text-slate-900 mb-3 flex items-center gap-2">
+                                <i data-lucide="binary" class="w-4 h-4 text-slate-600"></i>
+                                <span class="lang-fr text-xs uppercase tracking-wider">Développement</span>
+                                <span class="lang-en text-xs uppercase tracking-wider">Development</span>
+                            </h5>
+                            <p class="text-xs text-slate-600 leading-relaxed">
+                                <span class="lang-fr">C/C++, Python. Interfaçage matériel/logiciel.</span>
+                                <span class="lang-en">C/C++, Python. Hardware/Software interfacing.</span>
+                            </p>
+                        </div>
+                        <div class="bg-slate-50 p-5 rounded-2xl border border-slate-100">
+                            <h5 class="font-bold text-slate-900 mb-3 flex items-center gap-2">
+                                <i data-lucide="cpu" class="w-4 h-4 text-slate-600"></i>
+                                <span class="lang-fr text-xs uppercase tracking-wider">Électronique</span>
+                                <span class="lang-en text-xs uppercase tracking-wider">Electronics</span>
+                            </h5>
+                            <p class="text-xs text-slate-600 leading-relaxed">
+                                <span class="lang-fr">Systèmes embarqués, capteurs et IoT connectés.</span>
+                                <span class="lang-en">Embedded systems, sensors, and connected IoT.</span>
+                            </p>
+                        </div>
+                        <div class="bg-slate-50 p-5 rounded-2xl border border-slate-100">
+                            <h5 class="font-bold text-slate-900 mb-3 flex items-center gap-2">
+                                <i data-lucide="wrench" class="w-4 h-4 text-slate-600"></i>
+                                <span class="lang-fr text-xs uppercase tracking-wider">Maintenance IT</span>
+                                <span class="lang-en text-xs uppercase tracking-wider">IT Maintenance</span>
+                            </h5>
+                            <p class="text-xs text-slate-600 leading-relaxed">
+                                <span class="lang-fr">Diagnostic et résolution pannes critiques sur SI.</span>
+                                <span class="lang-en">Diagnosis and critical failure resolution on IS.</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-20 bg-slate-50">
+        <div class="max-w-6xl mx-auto px-6">
+            <h2 class="text-3xl font-bold mb-12 text-center">
+                <i data-lucide="flask-conical" class="inline-block text-blue-600 mb-2"></i><br>
+                <span class="lang-fr">Expertise Technique</span>
+                <span class="lang-en">Technical Expertise</span>
+            </h2>
+
+            <div class="grid md:grid-cols-3 gap-8 text-center">
+                <div class="bg-white p-8 rounded-3xl shadow-sm border border-slate-100">
+                    <div class="w-12 h-12 bg-blue-100 text-blue-600 rounded-2xl flex items-center justify-center mb-6 mx-auto">
+                        <i data-lucide="code-2"></i>
+                    </div>
+                    <h4 class="text-lg font-bold mb-4">Architecture & Dev</h4>
+                    <div class="flex flex-wrap justify-center gap-2">
+                        <span class="px-3 py-1 bg-slate-50 rounded-lg text-xs font-bold text-slate-600">SQL</span>
+                        <span class="px-3 py-1 bg-slate-50 rounded-lg text-xs font-bold text-slate-600">HTML/CSS</span>
+                        <span class="px-3 py-1 bg-slate-50 rounded-lg text-xs font-bold text-slate-600">JS</span>
+                        <span class="px-3 py-1 bg-slate-50 rounded-lg text-xs font-bold text-slate-600">C/C++</span>
+                        <span class="px-3 py-1 bg-slate-50 rounded-lg text-xs font-bold text-slate-600">Network Knowledges</span>
+                    </div>
+                </div>
+
+                <div class="bg-white p-8 rounded-3xl shadow-sm border border-slate-100">
+                    <div class="w-12 h-12 bg-purple-100 text-purple-600 rounded-2xl flex items-center justify-center mb-6 mx-auto">
+                        <i data-lucide="git-pull-request"></i>
+                    </div>
+                    <h4 class="text-lg font-bold mb-4">Management SI</h4>
+                    <div class="flex flex-wrap justify-center gap-2">
+                        <span class="px-3 py-1 bg-slate-50 rounded-lg text-xs font-bold text-slate-600">PM Tools</span>
+                        <span class="px-3 py-1 bg-slate-50 rounded-lg text-xs font-bold text-slate-600">Office 365</span>
+                        <span class="px-3 py-1 bg-slate-50 rounded-lg text-xs font-bold text-slate-600">Power BI</span>
+                    </div>
+                </div>
+
+                <div class="bg-white p-8 rounded-3xl shadow-sm border border-slate-100">
+                    <div class="w-12 h-12 bg-green-100 text-green-600 rounded-2xl flex items-center justify-center mb-6 mx-auto">
+                        <i data-lucide="users"></i>
+                    </div>
+                    <h4 class="text-lg font-bold mb-4">Soft Skills</h4>
+                    <div class="flex flex-wrap justify-center gap-2">
+                        <span class="px-3 py-1 bg-slate-50 rounded-lg text-xs font-bold text-slate-600">Teamwork</span>
+                        <span class="px-3 py-1 bg-slate-50 rounded-lg text-xs font-bold text-slate-600">Multiple languages</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact" class="bg-slate-900 text-white py-20">
+        <div class="max-w-4xl mx-auto px-6 text-center">
+            <h2 class="text-4xl font-bold mb-8">
+                <span class="lang-fr">Travaillons Ensemble !</span>
+                <span class="lang-en">Let's Work Together !</span>
+            </h2>
+            <div class="flex justify-center space-x-6 mb-12">
+                <button onclick="openGmail()" class="w-14 h-14 bg-slate-800 rounded-2xl flex items-center justify-center hover:bg-blue-600 transition-all text-white shadow-lg">
+                    <i data-lucide="mail"></i>
+                </button>
+                <a href="https://www.linkedin.com/in/stanislas-legrand-497b09239" class="w-14 h-14 bg-slate-800 rounded-2xl flex items-center justify-center hover:bg-blue-600 transition-all text-white">
+                    <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24">
+                        <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                    </svg>
+                </a>
+                <a href="https://github.com/Stanislaws-Legrand" class="w-14 h-14 bg-slate-800 rounded-2xl flex items-center justify-center hover:bg-blue-600 transition-all text-white">
+                    <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24">
+                        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                    </svg>
+                </a>
+            </div>
+            <p class="text-slate-500 text-sm italic">
+                <b><i>"Be you. Be proud of you, because you can be... do what we want to do"<br>- F.Hollande<b></i>
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // Centralized Contact Logic
+        function openGmail() {
+            window.open('https://mail.google.com/mail/?view=cm&fs=1&to=stanstan14dec@gmail.com', '_blank');
+        }
+
+        function toggleLanguage() {
+            const html = document.documentElement;
+            const btnText = document.getElementById('lang-btn-text');
+            
+            if (html.lang === 'fr') {
+                html.lang = 'en';
+                btnText.innerText = 'FR';
+            } else {
+                html.lang = 'fr';
+                btnText.innerText = 'EN';
+            }
+        }
+    </script>
+</body>
+</html>
